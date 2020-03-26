@@ -30,17 +30,22 @@ const theme = createMuiTheme({
 class App extends React.Component {
   state={
     inputSphere:0,
+    inputCylinder: 0,
+    inputAddition:0,
     results:result.data,
     darkMode: false,
   }
-  findResults=(inputSphere)=>{
+  findResults=(inputSphere, inputCylinder, inputAddition)=>{
     let filteredResults = result.data.filter( product => {
-      return inputSphere <= product.maxSphere && inputSphere >= product.minSphere;
+      let sphereCheck = inputSphere <= product.maxSphere && inputSphere >= product.minSphere;
+      let cylinderCheck = inputCylinder <= product.maxCylinder && inputCylinder >= product.minCylinder;
+      let additionCheck = inputAddition <= product.maxAddition && inputAddition >= product.minAddition;
+      return sphereCheck && cylinderCheck && additionCheck;
     })
     this.setState({results:filteredResults})
   }
   onSearch=()=>{
-    this.findResults(this.state.inputSphere)
+    this.findResults(this.state.inputSphere, this.state.inputCylinder, this.state.inputAddition)
   }
   onChange=(key,value)=>{
     this.setState({[key]:value})
@@ -51,7 +56,7 @@ class App extends React.Component {
     })
   }
   render (){
-    const { darkMode, inputSphere, results } = this.state;
+    const { darkMode, inputSphere, inputCylinder, inputAddition, results } = this.state;
     return(
       <ThemeProvider theme={theme}>
         <div className={darkMode?"AppDark":"AppLight"}>
@@ -60,6 +65,18 @@ class App extends React.Component {
             inputField={inputSphere}
             name="inputSphere"
             label="Sphere"
+            onChange={this.onChange}
+          />
+          <InputField
+            inputField={inputCylinder}
+            name="inputCylinder"
+            label="Cylinder"
+            onChange={this.onChange}
+          />
+          <InputField
+            inputField={inputAddition}
+            name="inputAddition"
+            label="Addition"
             onChange={this.onChange}
           />
           <SearchButton
