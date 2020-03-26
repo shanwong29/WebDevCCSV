@@ -40,7 +40,7 @@ class App extends React.Component {
     this.setState({results:filteredResults})
   }
   onSearch=()=>{
-    console.log("to be done")
+    this.findResults(this.state.inputSphere)
   }
   onChange=(key,value)=>{
     this.setState({[key]:value})
