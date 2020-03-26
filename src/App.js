@@ -34,7 +34,10 @@ class App extends React.Component {
     darkMode: false,
   }
   findResults=(inputSphere)=>{
-    this.setState({results:result.data})
+    let filteredResults = result.data.filter( product => {
+      return inputSphere <= product.maxSphere && inputSphere >= product.minSphere;
+    })
+    this.setState({results:filteredResults})
   }
   onSearch=()=>{
     console.log("to be done")
