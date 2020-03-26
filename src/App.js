@@ -30,7 +30,7 @@ const theme = createMuiTheme({
 class App extends React.Component {
   state={
     inputSphere:0,
-    results:[],
+    results:result.data,
     darkMode: false,
   }
   findResults=(inputSphere)=>{
